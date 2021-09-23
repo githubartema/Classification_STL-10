@@ -5,11 +5,13 @@ Weights for trained models are provided.
 
 ## Plan of research and general thoughts
 The main idea to go through different backbones and classifiers and to find the right combination that can be fine-tuned the best.
-I've compared ResNet50 and MobileNetV2 as backbones (pretrained on ImageNet), but I haven't tried EfficientNet family for this task, the results might be better.
+I've compared ResNet50 and MobileNetV2 as backbones (pretrained on ImageNet).
 The classifier can be checked in model class.
 
-Images are resized to standart (224, 224), but another approach can be to modify first convolution layer of backbone or add a new one (btw I believe the last one is better). 
-But the model converged well even in this case.
+P.S. I haven't tried EfficientNet family for this task, the results might be better.
+
+Images are resized to standart (224, 224). I'm not sure that's the best way to deal with it, but should be better than rely on using average adaprive puling as 
+kernels might not be able to extract the features with the usual size.
 
 I have not used unlabeled data mainly due to limited time. 
 However, I'm going to **describe** several approaches to use it. 
