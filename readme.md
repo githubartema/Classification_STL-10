@@ -47,7 +47,7 @@ The fine-tuning has been done in several stages, starting from training only cla
 
 P.S. If we check provided EDA, we can notice that in the test case there are less outliers in comparison to train data. Thus, for test data we have some "easier" distribution.
 
-**Link to TensorBoard for ResNet50:** [tap here](https://tensorboard.dev/experiment/rTq70zmmRJeXbklyFQs46g/#scalars)
+**Link to TensorBoard for ResNet50:** [tap here](https://tensorboard.dev/experiment/SmExjs0QTeuNPDDDltnfNg/#scalars&_smoothingWeight=0&runSelectionState=eyJ0cmFpbiI6dHJ1ZSwiX2Vwb2NoXyI6dHJ1ZX0%3D)
 
 ## Installation
 
