@@ -5,11 +5,11 @@ Weights for trained models are provided.
 
 ## Plan of research and general thoughts
 The main idea to go through different backbones and classifiers and to find the right combination that can be fine-tuned the best.
-ResNet50 did the best job as a backbone (pretrained on ImageNet), but I haven't tried EfficientNet family for this task, the results might be better.
+I've compared ResNet50 and MobileNetV2 as backbones (pretrained on ImageNet), but I haven't tried EfficientNet family for this task, the results might be better.
 The classifier can be checked in model class.
 
-Images are resized to standart (224, 224), but nother approach can be to modify first convolution layer of backbone or add a new one. 
-Generally speaking, this way the distribution can get different from ImageNet. But the model converged good even in this case.
+Images are resized to standart (224, 224), but another approach can be to modify first convolution layer of backbone or add a new one. 
+Generally speaking, this way the distribution can get different from ImageNet. But the model converged well even in this case.
 
 I have not used unlabeled data mainly due to limited time. 
 However, I'm going to **describe** several approaches to use it. 
@@ -17,7 +17,7 @@ I've conducted a research on modern SOTA semi-supervised approaches (SSL) for su
 
 There are some really cool ideas like https://paperswithcode.com/paper/spinalnet-deep-neural-network-with-gradual-1
 
-Quite intuitive approach can be to train classifier first on labeled data and then to pseudo-classify unlabaled data using thershold. For classifying unlabaled data we can use weak augmentation (for better results) and after retrain our network using strong augmentation of the new dataset.
+The more intuitive approach can be to train classifier first on labeled data and then to pseudo-classify unlabeled data using threshold. For classifying unlabaled data we can use weak augmentation (for better results) and after retrain our network using strong augmentation for the new dataset.
 https://arxiv.org/abs/2001.07685
 
 Another paper suggests similar approach, but using dynamic thershold while pseudo-labeling unlabeled data.
@@ -38,12 +38,12 @@ To sum up:
 
 ## Results
 
-| Backbone | Accuracy (test) | Averaged F1 (test) | Loss | Epochs |
+| Backbone | Accuracy (test) | Averaged F1 (valid) | Loss | Epochs |
 | ------ | ------ | ------ | ------ | ------ |
-| MobilenetV2 | 0.4132 |     |     |      |    |
-| ResNet-50  | 0.96  |     |     |   35     |
+| MobilenetV2 | 0.9 |  0.89  |  1.56   |   28   |    
+| ResNet-50  | 0.96  |  0.96  |  1.5  |   35     |
 
-The fine-tuning has been done in several stages, starting from training only classifier for several epochs and then slightly unfreezing the backbone layers (including unfreezing BatchNorm).
+The fine-tuning has been done in several stages, starting from training only classifier for several epochs and then slightly unfreezing the backbone layers (including unfreezing BatchNorm). Network class alows to do that.
 
 P.S. If we check provided EDA, we can notice that in the test case there are less outliers in comparison to train data. Thus, for test data we have some "easier" distribution.
 
@@ -63,19 +63,32 @@ pip install catalyst
 **The directory tree should be:**
 
 <pre>
-├── Predict_masks.py
+.
+├── EDA_Classification.ipynb
+├── Predict_classes.py
 ├── Train.py
 ├── config.py
 ├── data
-│   ├── test_images            #download test images here
-│   └── train_images           #download train images here
-├── images
+│   ├── test
+│   │   └── images
+│   └── train
+│       ├── airplane
+│       ├── bird
+│       ├── car
+│       ├── cat
+│       ├── deer
+│       ├── dog
+│       ├── horse
+│       ├── monkey
+│       ├── ship
+│       └── truck
+├── model
+│   └── finetune_model.py
 ├── readme.md
 ├── utils
-│   └── utils.py
+│   └── utils.py
 └── weights
-    ├── UnetEfficientNetB4_IoU_059.pth
-    └── UnetResNet50_IoU_043.pth 
+    └── best-last-resnet50.pth
 </pre>
 
 ## Evaluation
@@ -85,29 +98,28 @@ There is a Predict_classes.py script which can be used to evaluate the model and
 Usage example:
 
 ```sh
-python3 Predict_classes.py -dir /Users/user/Documents/steel_defect_detection/data/  -weights_dir /Users/user/Documents/steel_defect_detection/data/weights
+python3 Predict_classes.py -dir /Users/user/Documents/Classification_STL-10/data/  -weights_dir /Users/user/Documents/Classification_STL-10/weights
 ```
 ### Arguments
 ```sh
--dir    : Pass the full path of a directory containing a folder "train" and "train.csv".
+-dir    : Pass the full path of a directory containing a folder "test/images".
 -weights_dir   : Pass a weights directory.
 ```
 
 ## Training
 
 The model is supposed to be trained on the STL-10 dataset. 
-You can choose which backbone to use and a batch size. The default is ResNet50.
+You can choose a batch size to use. 
 
 It is necessary to point the directory where the train folder is stored.
 
 Usage example:
 ```sh
-python3 Train.py -dir /Users/user/Documents/steel_defect_detection/data/ -num_of_workers 4
+python3 Train.py -dir /Users/user/Documents/Classification_STL-10/data/ -num_of_workers 4
 ```
 ### Arguments
 ```sh
 -dir    : Pass the full path of a directory containing a folder "train".
--encoder   : Backbone to use as encoder, default='resnet50'.
 -batch_size   : Batch size for training, default=8.
 -num_of_workers   : Number of workers for training, default=0.
 ```
