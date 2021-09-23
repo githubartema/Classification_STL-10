@@ -8,8 +8,8 @@ The main idea to go through different backbones and classifiers and to find the 
 I've compared ResNet50 and MobileNetV2 as backbones (pretrained on ImageNet), but I haven't tried EfficientNet family for this task, the results might be better.
 The classifier can be checked in model class.
 
-Images are resized to standart (224, 224), but another approach can be to modify first convolution layer of backbone or add a new one. 
-Generally speaking, this way the distribution can get different from ImageNet. But the model converged well even in this case.
+Images are resized to standart (224, 224), but another approach can be to modify first convolution layer of backbone or add a new one (btw I believe the last one is better). 
+But the model converged well even in this case.
 
 I have not used unlabeled data mainly due to limited time. 
 However, I'm going to **describe** several approaches to use it. 
