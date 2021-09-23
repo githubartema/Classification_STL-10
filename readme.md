@@ -34,7 +34,7 @@ To sum up:
  - Architecture: ResNet50, MobileNetV2 with custom heads
  - Several-stage fine-tuning
  - Loss function: BinaryCrossEntropy
- - Optimizer: SGD (learning rate for backbone 1e-3, learning rate for classifier 1e-2, momentum 0.9), Adam didn't work good for this case
+ - Optimizer: SGD (learning rate for backbone 1e-3, learning rate for classifier 1e-2, momentum 0.9), Adam didn't work good for this case.
  - learning scheduler: ReduceLROnPlateau(factor=0.15, patience=2)
  - EarlyStopping(patience=5, min_delta=0.001)
 
