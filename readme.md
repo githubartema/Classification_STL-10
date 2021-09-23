@@ -51,7 +51,7 @@ P.S. If we check provided EDA, we can notice that in the test case there are les
 
 ## Installation
 
-Catalyst library is required [catalyst](https://nodejs.org/).
+Catalyst library is required [catalyst](https://github.com/catalyst-team/catalyst).
 
 Installation:
 
