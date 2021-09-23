@@ -10,7 +10,7 @@ The classifier can be checked in model class.
 
 P.S. I haven't tried EfficientNet family for this task, the results might be better.
 
-Images are resized to standart (224, 224). I'm not sure that's the best way to deal with it, but should be better than to rely on using average adaprive puling as 
+Images are resized to standart (224, 224). I'm not sure that's the best way to deal with it, but should be better than to rely on using average adaptive pulling as 
 kernels might not be able to extract the features with the usual size.
 
 I have not used unlabeled data mainly due to limited time. 
