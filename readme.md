@@ -40,8 +40,8 @@ To sum up:
 
 | Backbone | Accuracy (test) | Averaged F1 (valid) | Loss | Epochs |
 | ------ | ------ | ------ | ------ | ------ |
-| MobilenetV2 | 0.9 |  0.89  |  1.56   |   28   |    
-| ResNet-50  | 0.96  |  0.96  |  1.5  |   35     |
+| MobilenetV2 | 90% |  89%  |  1.56   |   28   |    
+| ResNet-50  | 96%  |  96%  |  1.5  |   35     |
 
 The fine-tuning has been done in several stages, starting from training only classifier for several epochs and then slightly unfreezing the backbone layers (including unfreezing BatchNorm). Network class alows to do that.
 
