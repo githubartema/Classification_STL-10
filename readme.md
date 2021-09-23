@@ -17,7 +17,7 @@ I have not used unlabeled data mainly due to limited time.
 However, I'm going to **describe** several approaches to use it. 
 I've conducted a research on modern SOTA semi-supervised approaches (SSL) for such tasks.
 
-There are some really cool ideas like https://paperswithcode.com/paper/spinalnet-deep-neural-network-with-gradual-1
+There are some really cool ideas like https://arxiv.org/pdf/1911.09265v2.pdf.
 
 The more intuitive approach can be to train classifier first on labeled data and then to pseudo-classify unlabeled data using threshold. For classifying unlabaled data we can use weak augmentation (for better results) and after retrain our network using strong augmentation for the new dataset.
 https://arxiv.org/abs/2001.07685
